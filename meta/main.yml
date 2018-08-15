@@ -1,0 +1,19 @@
+---
+dependencies: 
+  - { role: geerlingguy.pip }
+  - { role: geerlingguy.docker }
+  - { role: panagiks.caddy_gen }
+
+galaxy_info:
+  author: panagiks
+  description: Orchestrate Containerized Web App deployment with Caddy.
+  company: "Lambdaspace"
+  license: license (MIT)
+  min_ansible_version: 2.4
+  galaxy_tags:
+    - docker
+    - caddy
+    - web
+    - services
+    - containers
+    - orchestration
