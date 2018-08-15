@@ -1,6 +1,2 @@
 ---
-# Run geerlingguy.docker to install & configure docker
-ensure_docker_system: yes
-
-# Run geerlingguy.docker to install docker python module
-ensure_docker_python: yes
+# defaults file for docker_webservices
