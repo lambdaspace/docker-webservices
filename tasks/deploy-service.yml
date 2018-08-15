@@ -1,0 +1,23 @@
+---
+- name: Clone repo containing Web Service Dockerfile
+  git:
+    repo: "{{ service_definition.build.repo }}"
+    dest: "/tmp/{{ service_definition.name }}"
+  when: service_definition.build is defined
+- name: Build Web Service image
+  docker_image:
+    name: "{{ service_definition.build.name | default(service_definition.name) }}"
+    state: present
+    path: "/tmp/{{ service_definition.name }}/{{ service_definition.build.context_path }}"
+    dockerfile: "/tmp/{{ service_definition.name }}/{{ service_definition.build.dockerfile }}"
+  when: service_definition.build is defined
+- name: Start Web Service container
+  docker_container:
+    name: "{{ inventory_hostname }}_{{ service_definition.name }}"
+    image: "{{ service_definition.build.name | default(service_definition.name) }}"
+    # TODO: Check for a way to pass all args ...
+    env: "{{ service_definition.container_opts.env | default() }}"
+    labels:  # For details see: https://github.com/wemake-services/caddy-gen#usage
+      virtual.host: "{{ service_definition.caddy.host }}"
+      virtual.port: "{{ service_definition.caddy.port }}"
+      virtual.tls-email: "{{ service_definition.caddy.mail }}"
