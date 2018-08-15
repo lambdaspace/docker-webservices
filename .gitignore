@@ -1,0 +1,6 @@
+local-configure.yml
+._*
+*.retry
+*.log
+.DS_Store
+*.py[co]
