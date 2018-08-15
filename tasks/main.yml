@@ -1,8 +1,6 @@
 ---
-- name: "Deploy Web Services"
+- name: Deploy Web Services
   include_tasks: deploy-service.yml
-  # include_role:
-  #   name: deploy_{{ service_definition.name }}
   with_items: "{{ docker_web_services }}"
   loop_control:
     loop_var: service_definition
