@@ -1,4 +1,15 @@
 ---
+- name: Ensure docker is installed correctly
+  include_role:
+    name: geerlingguy.docker
+  when: ensure_docker_system
+- name: Ensure docker python module is installed correctly
+  include_role:
+    name: geerlingguy.pip
+  vars:
+    pip_install_packages:
+      - name: docker
+  when: ensure_docker_python
 - name: Deploy Web Services
   include_tasks: deploy-service.yml
   with_items: "{{ docker_web_services }}"
