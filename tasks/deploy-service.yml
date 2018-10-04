@@ -3,14 +3,14 @@
   git:
     repo: "{{ service_definition.build.repo }}"
     dest: "/tmp/{{ service_definition.name }}"
-  when: service_definition.build is defined
+  when: "'build' in service_definition"
 - name: Build Web Service image
   docker_image:
     name: "{{ service_definition.build.name | default(service_definition.name) }}"
     state: present
     path: "/tmp/{{ service_definition.name }}/{{ service_definition.build.context_path }}"
     dockerfile: "/tmp/{{ service_definition.name }}/{{ service_definition.build.dockerfile }}"
-  when: service_definition.build is defined
+  when: "'build' in service_definition"
 - name: Start Web Service container
   docker_container:
     name: "{{ inventory_hostname }}_{{ service_definition.name }}"
