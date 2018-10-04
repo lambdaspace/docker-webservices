@@ -6,4 +6,4 @@
     loop_var: service_definition
 - name: Deploy Caddy
   include_role:
-    name: deploy_caddy
+    name: panagiks.caddy_gen
