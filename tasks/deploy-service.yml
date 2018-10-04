@@ -16,6 +16,7 @@
     name: "{{ inventory_hostname }}_{{ service_definition.name }}"
     image: "{{ service_definition.build.name | default(service_definition.name) }}"
     # TODO: Check for a way to pass all args ...
+    volumes: "{{ service_definition.container_opts.volumes | default() }}"
     env: "{{ service_definition.container_opts.env | default() }}"
     labels:  # For details see: https://github.com/wemake-services/caddy-gen#usage
       virtual.host: "{{ service_definition.caddy.host }}"
