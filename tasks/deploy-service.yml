@@ -13,7 +13,7 @@
   when: "'build' in service_definition"
 - name: Start Web Service container
   docker_container:
-    name: "{{ inventory_hostname }}_{{ service_definition.name }}"
+    name: "{{ inventory_hostname }}_{{ service_definition.name | regex_replace('/','_') }}"
     image: "{{ service_definition.build.name | default(service_definition.name) }}"
     # TODO: Check for a way to pass all args ...
     volumes: "{{ service_definition.container_opts.volumes | default([]) }}"
