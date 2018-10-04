@@ -14,7 +14,7 @@
 - name: Start Web Service container
   docker_container:
     name: "{{ inventory_hostname }}_{{ service_definition.name | regex_replace('/','_') }}"
-    image: "{{ service_definition.build.name | default(service_definition.name) }}"
+    image: "{{ service_definition.build.name if service_definition.build is defined else service_definition.name }}"
     # TODO: Check for a way to pass all args ...
     volumes: "{{ service_definition.container_opts.volumes | default([]) }}"
     env: "{{ service_definition.container_opts.env | default({}) }}"
